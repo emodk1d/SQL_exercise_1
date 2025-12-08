@@ -115,16 +115,15 @@ INSERT INTO manufacturers (manufacturer_name) VALUES
 ('Производитель 1'),
 ('Производитель 2'),
 ('Производитель 3')
-ON CONFLICT (manufacturer_name) DO NOTHING;
+
 
 INSERT INTO products (manufacturer_id, product_category, product_name, selling_price, purchase_cost, stock_quantity)
 VALUES
 (1, 'Электроника', 'Телефон', 50000.00, 40000.00, 100),
 (2, 'Одежда', 'Футболка', 1500.00, 800.00, 200)
-ON CONFLICT DO NOTHING;
+
 
 INSERT INTO product_descriptions (product_id, description)
 VALUES
 (1, 'Смартфон'),
 (2, 'футболка')
-ON CONFLICT (product_id) DO NOTHING;
