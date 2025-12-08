@@ -94,7 +94,7 @@ RETURNS TRIGGER AS $$
 BEGIN
 
     IF (SELECT stock_quantity FROM products WHERE product_id = NEW.product_id) < NEW.quantity THEN
-        RAISE EXCEPTION 'Недостаточно товара на складе. ID товара: %', NEW.product_id;
+        RAISE EXCEPTION 'Недостаточно товара на складе. ', NEW.product_id;
     END IF;
 
     UPDATE products
@@ -107,7 +107,7 @@ $$ LANGUAGE plpgsql;
 
 DROP TRIGGER IF EXISTS trg_update_stock_on_sale ON transaction_items;
 CREATE TRIGGER trg_update_stock_on_sale
-AFTER INSERT ON transaction_items
+BEFORE INSERT ON transaction_items
 FOR EACH ROW
 EXECUTE FUNCTION update_product_stock();
 
